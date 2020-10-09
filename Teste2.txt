@@ -1,13 +1,16 @@
 SELECT SUM(pageviews) as totalPageviews FROM Total;
 
-SELECT SUM(pageviews) as SessaoUsuarios FROM Total
+SELECT idVisitante, SUM(pageviews) as SessaoUsuarios FROM Total
 GROUP BY idVisitante;
 
-SELECT date, SUM(visits) as totalSessao FROM Total
-GROUP BY date;
+SELECT IdVisitantes.date, SUM(Total.visits) as totalSessao FROM Total
+JOIN IdVisitantes 
+GROUP BY IdVisitantes.date;
 
-SELECT date, (SUM(timeOnSite)/SUM(visits)) as MediaSessao FROM Total
-GROUP BY date;
+SELECT IdVisitantes.date, (SUM(Total.timeOnSite)/SUM(Total.visits)) as MediaSessao FROM Total
+JOIN IdVisitantes 
+GROUP BY IdVisitantes.date;
 
-SELECT SUM(pageviews) as totalGeral FROM Total
+SELECT Device.browser SUM(Total.pageviews) as totalGeral FROM Total
+JOIN Device
 GROUP BY browser;
