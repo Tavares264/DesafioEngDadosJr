@@ -1,19 +1,13 @@
-●	Contagem de Pageviews;
-●	Número de sessões por usuário;
-●	Sessões distintas por data;
-●	Média de duração da sessão por data;
-●	Sessões diárias por tipo de browser;
+SELECT SUM(pageviews) as totalPageviews FROM Total;
 
-SELECT SUM(totals.pageviews) as totalPageviews FROM Total;
+SELECT SUM(pageviews) as SessaoUsuarios FROM Total
+GROUP BY idVisitante;
 
-SELECT SUM(totals.pageviews) as totalGeral FROM Total
-GROUP BY fullVisitorId;
-
-SELECT date, SUM(totals.visits) as totalGeral FROM Total
+SELECT date, SUM(visits) as totalSessao FROM Total
 GROUP BY date;
 
-SELECT date, (SUM(totals.timeOnSite)/SUM(totals.visits)) as MediaSessao FROM Total
+SELECT date, (SUM(timeOnSite)/SUM(visits)) as MediaSessao FROM Total
 GROUP BY date;
 
-SELECT SUM(totals.pageviews) as totalGeral FROM Total
-GROUP BY device.browser;
+SELECT SUM(pageviews) as totalGeral FROM Total
+GROUP BY browser;
